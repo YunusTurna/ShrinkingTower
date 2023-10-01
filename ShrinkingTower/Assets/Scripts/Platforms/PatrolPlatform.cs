@@ -1,15 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PatrolPlatform : MonoBehaviour
+public class PlatformMovement : MonoBehaviour
 {
-    public float patrolSpeed = 5f;
-    private Vector3 initialPosition; 
+    private Vector3 startPoint;
+    private Vector3 endPoint;
+    [SerializeField] private float offSet = 1f;
+    public float speed = 2.0f;
 
-    private void Awake()
+    void Start()
     {
-        
-        initialPosition = this.gameObject.transform.position; 
+        // Başlangıç ve bitiş noktalarını ayarlayın
+        startPoint = transform.position + new Vector3(-offSet, 0.0f, 0.0f);
+        endPoint = transform.position + new Vector3(offSet, 0.0f, 0.0f);
+    }
+
+    void Update()
+    {
+        float step = speed * Time.deltaTime;
+        transform.position = Vector3.MoveTowards(transform.position, endPoint, step);
+
+        if (transform.position == endPoint)
+        {
+            // Eğer nesne bitiş noktasına ulaştıysa, başlangıç ve bitiş noktalarını değiştirin.
+            Vector3 temp = startPoint;
+            startPoint = endPoint;
+            endPoint = temp;
+        }
     }
 }
