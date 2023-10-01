@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce = 7f;
     public float dashSpeed = 10f;
     public float dashDuration = 0.2f;
+    public float coinCounter = 0;
     private bool isGrounded = true;
     private bool isDashing = false;
     private float dashTime = 0f;
@@ -21,28 +22,37 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-       
-       Movement();
+
+        Movement();
         Jump();
 
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D other)
     {
-        if (collision.gameObject.CompareTag("Platform"))
+        if (other.gameObject.tag == "Platform")
         {
             isGrounded = true;
+        }
+
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Coin")
+        {
+            coinCounter++;
+
         }
     }
     void Movement()
     {
-       
+
         if (Input.GetKeyDown(KeyCode.E) && !isDashing)
         {
             isDashing = true;
             dashTime = dashDuration;
 
-            
+
             float dashDirection = (transform.localScale.x > 0) ? 1f : -1f;
             rb.velocity = new Vector2(dashDirection * dashSpeed, rb.velocity.y);
         }
@@ -58,12 +68,12 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            
+
             float moveInput = Input.GetAxis("Horizontal");
             Vector2 moveDirection = new Vector2(moveInput, 0);
             rb.velocity = new Vector2(moveDirection.x * moveSpeed, rb.velocity.y);
 
-            
+
             if (moveInput > 0)
             {
                 transform.localScale = new Vector3(1f, 1f, 1f);

@@ -14,13 +14,12 @@ public class MainWalls : MonoBehaviour
     private void Awake()
     {
         
-        initialPosition = this.gameObject.transform.position; 
+        initialPosition = this.gameObject.transform.position;
+        player = GameObject.FindGameObjectWithTag("Player");
+        gb = GameObject.Find("ResetMainWalls").GetComponent<GoBackMainWall>();
     }
 
-    void Start()
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-    }
+    
 
     void Update()
     {
