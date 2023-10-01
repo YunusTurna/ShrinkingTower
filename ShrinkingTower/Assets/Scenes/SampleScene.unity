@@ -247,9 +247,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef605074e1d37c746bbe64c0ce2bcf34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 5
-  jumpPower: 10
-  isGrounded: 1
+  moveSpeed: 5
+  jumpForce: 7
+  dashSpeed: 10
+  dashDuration: 0.2
 --- !u!61 &1002330464
 BoxCollider2D:
   m_ObjectHideFlags: 0
