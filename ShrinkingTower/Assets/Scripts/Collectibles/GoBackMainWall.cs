@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GoBackMainWall : MonoBehaviour
 {
-    public bool goBack = false;
+    public static bool goBack = false;
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.gameObject.tag == "Player")

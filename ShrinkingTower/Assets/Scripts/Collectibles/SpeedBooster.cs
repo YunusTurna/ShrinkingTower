@@ -6,6 +6,9 @@ public class SpeedBooster : MonoBehaviour
 {
     [SerializeField] private PlayerMovement pm;
     [SerializeField] private float speedCoefficent =2;
+    private void Start() {
+        pm = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+    }
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag == "Player")
         {

@@ -6,6 +6,9 @@ public class JumpBooster : MonoBehaviour
 {
     [SerializeField] private PlayerMovement pm;
     [SerializeField] private float jumpCoefficent =2;
+    private void Start() {
+        pm = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+    }
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.tag == "Player")
         {
@@ -17,6 +20,7 @@ public class JumpBooster : MonoBehaviour
         pm.jumpForce *=jumpCoefficent;
         yield return new WaitForSeconds(3);
         pm.jumpForce /=jumpCoefficent;
+        
 
     }
 }
